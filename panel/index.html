@@ -30,7 +30,7 @@
                 <div>
 					<img id="qrcode" height="170em" src="./ok.svg" />
 				</div>
-					<li><a id="qrcode" href="#" class="button special" title="手机扫描二维码登录">扫描二维码添加</a>
+					<li><a id="GetQrCode"  class="button special" title="手机扫描二维码登录">扫描二维码添加</a>
                     <li><a id="jumpapp" href="#" class="button special" title="APP登录">跳转京东APP添加</a>
                     <!--<li><a id="login" class="button special" title="APP登录" href="./login.html">控制中心</a>-->
                     <!--<li><a id="BeanChange" class="button special" title="走势图" href="./BeanChange.html">走势图</a>-->
@@ -50,7 +50,7 @@
                     </a>
                     <br /> <a id="UserNum" style="font-size:12px;"></a>
                     <br />欢迎🧡使用
-                    <script type="text/javascript" color="255,255,255" opacity='0.7' zIndex="-2" count="200" src="https://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+                    <script type="text/javascript" color="255,255,255" opacity='0.7' zIndex="777373773" count="200" src="https://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
                 </div>
                 
             </div>
@@ -108,7 +108,24 @@ swal("请务必看一遍", "✌️京东APP扫码后 页面跳转即为成功✌
         xmlhttp.send();
     }
     showQrcode()
-
+function GetQrCode() {
+    let timeStamp = new Date().getTime();
+    $.get('./qrcode?t=' + timeStamp, function (data) {
+      if (data.err == 0) {
+        $('#qrcontainer').removeClass('hidden');
+        $('#refresh_qrcode').addClass('hidden');
+        $('.landing').addClass('is-loading');
+        qrcode.clear();
+        qrcode.makeCode(data.qrcode);
+        checkLogin(data.user);
+      } else {
+        Swal.fire({
+          text: data.msg,
+          icon: 'error',
+        });
+      }
+    });
+  }
     function login() {
         var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
         xmlhttp.onreadystatechange = function() {
