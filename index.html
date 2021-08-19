@@ -4,31 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>在线登入</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="./js/jquery.base64.js"></script>
-    <script type="text/javascript" src="./js/skel.min.js"></script>
+    <title>何必烦忧</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/a251231/mass@main/panel/js/skel.min.js"></script>
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.all.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="./css/other.css?66886666">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/a251231/mass@main/panel/css/other.css?66886666">
     <link rel="icon" type="image/x-icon" href="https://github.com/favicon.ico" />
-    <link rel="stylesheet" type="text/css" href="./css/sweetalert.css">
-	<script type="text/javascript" src="./js/sweetalert-dev.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/a251231/mass@main/panel/css/sweetalert.css">
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/a251231/mass@main/panel/js/sweetalert-dev.js"></script>
 </head>
 
 <body class="landing">
-
+ <script type="text/javascript" color="255,255,255" opacity='0.7' zIndex="auto" count="200" src="https://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script> 
     <div id="page-wrapper">
     
         <section id="banner">
             <div class="inner">
-                <h2>生而为人</h2>
+                <h2>人生苦短，何必烦忧</h2>
                 <p>点击下方按钮开始使用</p>
                 <ul class="actions">
-                    <li><a id="button" class="button special" title="APP登录">跳转京东APP添加</a>
-                    <!--<li><a id="GetQrCode" class="button special" title="手机扫描二维码登录">扫描二维码添加</a>-->
+                <div>
+		<img id="qrcode" height="170em" src="./ok.svg" />
+		</div>
+		    <li><a id="GetQrCode"  class="button" onclick="GetQrCode()" title="注意事项">注意事项</a>
+                    <li><a id="jumpapp" href="#"  class="button" title="APP登录">跳转京东APP添加</a>
                     <!--<li><a id="login" class="button special" title="APP登录" href="./login.html">控制中心</a>-->
                     <!--<li><a id="BeanChange" class="button special" title="走势图" href="./BeanChange.html">走势图</a>-->
                     </li>
@@ -42,18 +41,17 @@
                 </p>
 
                 <div class="more">
-                    <a class="qq_group" id="qq_group" target="_blank" href="https://t.me/jstool">
-                        <!--<img border="0" src="static/image/qq.png" alt="联系客服" title="联系客服">-->
+                   <!-- <a class="qq_group" id="qq_group" target="_blank" href="">
+                        <img border="0" src="static/image/qq.png" alt="联系客服" title="联系客服">
                     </a>
-                    <br /> <a id="UserNum" style="font-size:12px;"></a>
+                    <br /> <a id="UserNum" style="font-size:12px;"></a>-->
                     <br />欢迎🧡使用
                     
                 </div>
-                
             </div>
         </section>
     </div>
-    <div id="qrcontainer" class="hidden">
+    <!--<div id="qrcontainer" class="hidden">
         <div class="qframe" id="qframe">
             <div id="refresh_qrcode" class="hidden">
                 <div>
@@ -73,106 +71,94 @@
             <div class="qframe-close" title="关闭">✖</div>
         </div>
     </div>
+	
  <div>
- <script>
-swal("请务必看一遍", "✌️京东APP扫码后 页面跳转即为成功✌️\n❤️打开APP完成新手任务❤️\n❣️京东❣️➨我的➨更多工具➨(农场、萌宠、工厂、宠汪汪、金榜创造营、领现金、健康社区、种豆得豆)\n❣️京喜❣️➨我的➨(农场、牧场、工厂、财富岛)\n❣️金融❣️➨我的➨(种摇钱树、天天提鹅、养猪猪)\n☂️京东账号绑定微信可以更多¥¥☂️\n☠️请关闭免密支付☠️","success")
-        </script>
-        </div>
+        </div>-->
 </body>
-
-    <script>
-        var timer;
-        var qrcode = document.getElementById("qrcode")
-        var button = document.getElementById("button")
-
-        function showQrcode() {
-            var xmlhttp;
-            if (window.XMLHttpRequest) {
-                xmlhttp = new XMLHttpRequest();
-            } else {
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    qrcode.src = xmlhttp.responseText
+<script>
+    var timer;
+    var qrcode = document.getElementById("qrcode")
+    var loginUrl = ""
+    var success = "https://ghproxy.com/https://raw.githubusercontent.com/cdle/jd_study/main/xdd/static/ok.svg";
+    var jumpapp = document.getElementById('jumpapp')
+    var hd = document.getElementById("hd")
+  function GetQrCode() {
+swal("请务必看一遍", "✌️京东APP扫码后 页面跳转即为成功✌️\n❤️打开APP完成新手任务❤️\n❣️京东❣️➨我的➨更多工具➨(农场、萌宠、工厂、宠汪汪、金榜创造营、领现金、健康社区、种豆得豆)\n❣️京喜❣️➨我的➨(农场、牧场、工厂、财富岛)\n❣️金融❣️➨我的➨(种摇钱树、天天提鹅、养猪猪)\n☂️京东账号绑定微信可以更多¥¥☂️\n☠️请关闭免密支付☠️","success")
+  }
+    function showQrcode() {
+        var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                data = JSON.parse(xmlhttp.responseText)
+                if (data.url && data.url.indexOf("http") != -1) {
+                    qrcode.src = "data:image/png;base64," + data.img
+                    loginUrl = data.url
+                } else {
+                    showQrcode()
                 }
             }
-            xmlhttp.open("GET", "/api/login/qrcode", true);
-            xmlhttp.send();
         }
-        showQrcode()
+        xmlhttp.open("GET", "/api/login/qrcode", true);
+        xmlhttp.send();
+    }
+    showQrcode()
 
-        function login() {
-            var xmlhttp;
-            if (window.XMLHttpRequest) {
-                xmlhttp = new XMLHttpRequest();
-            } else {
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    var results = xmlhttp.responseText
-                    console.log(results)
-                    switch (results) {
-                        case "授权登录未确认":
-                            break;
-                        case "成功":
-                            button.innerText = "成功"
-                            button.style.opacity = 1
-                            button.style.backgroundColor = "#1E9FFF"
-                            qrcode.style.opacity = 0.4
-                            // qrcode.src = "https://cdn.jsdelivr.net/gh/cdle/static/reward.jpg"
-                            clearInterval(timer)
-                            break;
-                        default:
-                            showQrcode()
-                            break;
-                    }
-                }
-            }
-            xmlhttp.open("GET", "/api/login/query", true);
-            xmlhttp.send();
-        }
+			function login() {
+				var xmlhttp = window.XMLHttpRequest
+					? new XMLHttpRequest()
+					: new ActiveXObject("Microsoft.XMLHTTP");
+				xmlhttp.onreadystatechange = function () {
+					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+						var results = xmlhttp.responseText;
+						console.log(results);
+						switch (results) {
+							case "授权登录未确认":
+								break;
+							case "登录":
+								qrcode.src = success;
+								clearInterval(timer);
+								setTimeout(() => {
+									window.location.href = "/admin"
+								}, 1000);
+								break;
+							case "成功":
+								qrcode.src = success;
+								clearInterval(timer);
+								setTimeout(() => {}, 1000);
+								break;
+							default:
+								showQrcode();
+								break;
+						}
+					}
+				};
+				xmlhttp.open("GET", "/api/login/query", true);
+				xmlhttp.send();
+			}
 
-        function polling() {
-            timer = setInterval(() => {
-                login()
-            }, 1500);
-        }
-        polling()
+    function polling() {
+        timer = setInterval(() => {
+            login()
+        }, 1500);
+    }
+    polling()
 
-        function refresh() {
-            if (button.style.opacity == 1) {
-                showQrcode()
-                button.style.opacity = 0
-                qrcode.style.opacity = 1
-                polling()
-            } else {
-                login()
-            }
+    jumpapp.addEventListener('click', function() {
+        if (loginUrl) {
+            window.location.href = `openapp.jdmobile://virtual/ad?params=${encodeURI(
+                JSON.stringify({
+                    category: 'jump',
+                    des: 'ThirdPartyLogin',
+                    action: 'to',
+                    onekeylogin: 'return',
+                    url: loginUrl,
+                    authlogin_returnurl: 'weixin://',
+                    browserlogin_fromurl: window.location.host,
+                })
+            )}`;
+        } else {
+            alert('还没加载好，请稍后重试');
         }
-
-        document.addEventListener("visibilitychange", function() {
-            if (button.style.opacity != 1) {
-                if (document.visibilityState == "visible") {
-                    clearInterval(timer)
-                    polling()
-                }
-            }
-        });
-        var bgimg = document.getElementById("bgimg")
-        var size = function() {
-            if (document.documentElement.clientWidth > document.documentElement.clientHeight) {
-                bgimg.style.Height = "auto"
-                bgimg.width = document.documentElement.clientWidth
-            } else {
-                bgimg.height = document.documentElement.clientHeight
-                bgimg.style.Width = "auto"
-            }
-        }
-        size()
-        window.onresize = function() {
-            size()
-        }
-    </script>
+    })
+</script>
 </html>
